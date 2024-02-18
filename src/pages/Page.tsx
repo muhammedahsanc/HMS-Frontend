@@ -4,7 +4,8 @@ import {AdminAuth, ProtectedRoute} from "../components/admin";
 // import {ProtectedRouteUser} from "../components/user";
 import {Authpage} from "../components/protected-route";
 import {Auth} from "../components/protected-route";
-// import AdminDashboard from "../components/admin/adminDashboard";
+import ProtectedRouteAdministrater from "../components/administrater/ProtectedRouteAdministrater";
+import AdministraterDashboard from "../components/administrater/AdministraterDashboard";
 
 function Page() {
 
@@ -18,9 +19,9 @@ function Page() {
           <Route path="/admin" element={<AdminAuth/>} />
         </Route>
       
-        {/* <Route element={<ProtectedRouteUser />}>
-          <Route path="/user" element={<AdminDashboard/>} />
-        </Route> */}
+        <Route element={<ProtectedRouteAdministrater />}>
+          <Route path="/doctor-administrater" element={<AdministraterDashboard/>} />
+        </Route>
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>

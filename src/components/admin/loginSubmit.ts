@@ -15,7 +15,6 @@ export type SubmitProps = {
 
 const loginSubmit = async ({formData,setFormData,error}:SubmitProps) => {
  
-
     try {
       if (
         formData.username &&
