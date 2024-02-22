@@ -46,7 +46,7 @@ export default function SignIn() {
     const promise1 = Promise.resolve(loginName);
     promise1.then((value) => {
       dispatch(addToList({ data: value.data, role: value.role }));
-      navigate(`/${value.role.toLowerCase()}`);
+      // navigate(`/${value.role.toLowerCase()}`);
       console.log(value.role);
     });
   }
@@ -68,7 +68,7 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" onSubmit={submitLoginData} noValidate sx={{ mt: 1 }}>
+          <Box component="div"  sx={{ mt: 1 }}>
             <TextField
             value={formData.username}
             onChange={checkEmail}

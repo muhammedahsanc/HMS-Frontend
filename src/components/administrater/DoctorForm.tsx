@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import  { useEffect, useState } from "react";
+import styled from "styled-components";
 import axios from "../../config/axiosinstance";
-
+import { notify } from "../../utils";
+interface CategoryItem {
+  _id: string;
+  name: string;
+}
 const ContentWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -53,31 +57,49 @@ const Button = styled.button`
 
 const DoctorCreationForm = () => {
   const [doctorInfo, setDoctorInfo] = useState({
-    doctorName: '',
-    username: '',
-    department: '',
-    password: '',
+    doctorName: "",
+    username: "",
+    department: "",
+    password: "",
+    qualification:"",
   });
+  const [category, setcategory] = useState("");
 
-  const handleInputChange = (e:any) => {
+  const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     setDoctorInfo((prevInfo) => ({ ...prevInfo, [name]: value }));
   };
 
-  const handleSubmit = async(e:any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
-    const data = await axios.post("/administrater/createDoctor", doctorInfo);
-      console.log(data);
-      
+      const data = await axios.post("/administrater/createDoctor", doctorInfo);
+      if(data){
+        notify("Created Successfully")
+        setDoctorInfo({
+          doctorName: "",
+    username: "",
+    department: "",
+    password: "",
+    qualification:"",
+        })
+      }
     } catch (error) {
       console.log(error);
-      
     }
-
-    console.log('Doctor information submitted:', doctorInfo);
-    // You can reset the form or perform any other necessary actions
   };
+  const getCategories = async () => {
+    try {
+      const data = await axios.get("/administrater/getCategory");
+      console.log(data);
+      setcategory(data.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getCategories();
+  }, []);
 
   return (
     <ContentWrapper>
@@ -89,6 +111,16 @@ const DoctorCreationForm = () => {
               type="text"
               name="doctorName"
               value={doctorInfo.doctorName}
+              onChange={handleInputChange}
+              required
+            />
+          </FormGroup>
+          <FormGroup>
+            <label>Qualification:</label>
+            <Input
+              type="text"
+              name="qualification"
+              value={doctorInfo.qualification}
               onChange={handleInputChange}
               required
             />
@@ -111,14 +143,12 @@ const DoctorCreationForm = () => {
               onChange={handleInputChange}
               required
             >
-              <option value="">Select Department</option>
-              <option value="cardiology">Cardiology</option>
-              <option value="orthopedics">Orthopedics</option>
-              <option value="neurology">Neurology</option>
-              <option value="dermatology">Dermatology</option>
-              <option value="oncology">Oncology</option>
-              <option value="pediatrics">Pediatrics</option>
-              <option value="internal-medicine">Internal Medicine</option>
+             <option value="">Select Department</option>
+      {Array.isArray(category) && category.map((item: CategoryItem) => (
+          <option key={item._id} value={`${item._id}|${item.name}`}>
+          {item.name}
+        </option>
+      ))}
             </Select>
           </FormGroup>
           <FormGroup>

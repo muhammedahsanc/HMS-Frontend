@@ -16,6 +16,15 @@ export type AdministraterDataProps = {
   name:string;
   role:string;
 };
+export type StaffDataProps = {
+  staff_id: string;
+  username: string;
+  password: string;
+  name:string;
+  category_name:string;
+  qualification:string;
+
+};
 export type MainProps = {
   formData: formDataProps;
   setFormData: setStateType<formDataProps>;

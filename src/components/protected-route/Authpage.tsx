@@ -8,7 +8,15 @@ function Authpage() {
   if (!token || !userList.role) {
     return <Outlet />;
   } else if (token && userList.role) {
-    return <Navigate to={`/${userList.role.toLowerCase()}`} />;
+    return (
+      <Navigate
+        to={`/${
+          userList.role.toLowerCase() == "doctor-administrater"
+            ? "administrater"
+            : userList.role.toLowerCase()
+        }`}
+      />
+    );
   }
 }
 

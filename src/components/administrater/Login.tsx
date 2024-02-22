@@ -16,7 +16,7 @@ const LoginPageWrapper = styled.div`
   height: 97.5vh;
   background: #f5f5f5;
 `;
-const LoginForm = styled.form`
+const LoginForm = styled.div`
   width: 400px;
   padding: 40px;
   border-radius: 8px;
@@ -26,7 +26,7 @@ const LoginForm = styled.form`
 `;
 
 const Heading = styled.h2`
-  color: #2a5298;
+  color: #0b9c67;
   margin-bottom: 30px;
   text-align: center;
 `;
@@ -49,7 +49,7 @@ const Input = styled.input`
 const Button = styled.button`
   width: 100%;
   padding: 12px;
-  background-color: #2a5298;
+  background-color:#0b9c67;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -62,7 +62,7 @@ const Button = styled.button`
 `;
 
 const LoginPage = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
   const [formData, setFormData] = React.useState<loginDataProps>({
@@ -126,7 +126,7 @@ const LoginPage = () => {
             />
           }
           label="Show password
-              +"
+              "
         />
         <Button type="submit" onClick={() => submitLoginData()}>
           Login

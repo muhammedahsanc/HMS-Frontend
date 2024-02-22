@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { FaHome, FaClipboardList, FaUser } from 'react-icons/fa';
+import { FaHome, FaClipboardList, FaUser,FaSignOutAlt,FaPlus   } from 'react-icons/fa';
 import DoctorForm from './DoctorForm';
+import AddDrDepartment from './AddDrDepartment';
+import ManageDr from './ManageDr';
+import Logout from './logout';
 
 const Dashboard = () => {
   const [selectedOption, setSelectedOption] = useState('');
+
+
 
   const handleOptionClick = (option:any) => {
     setSelectedOption(option);
@@ -22,14 +27,21 @@ const Dashboard = () => {
           <FaClipboardList size={20} />
           Create Doctor
         </Option>
-        <Option onClick={() => handleOptionClick('Option 3')}>
+        <Option onClick={() => handleOptionClick(<ManageDr/>)}>
           <FaUser size={20} />
           Manage Doctor
+        </Option>
+        <Option onClick={() => handleOptionClick(<AddDrDepartment/>)}>
+          <FaPlus  size={20} />
+          Add department
+        </Option>
+        <Option onClick={Logout}>
+          <FaSignOutAlt  size={20} />
+          Logout
         </Option>
       </Sidebar>
       <MainContent>
         {selectedOption || 'Select an option'}
-        {/* Additional content for the selected option goes here */}
       </MainContent>
     </Container>
   );
@@ -51,16 +63,16 @@ const Sidebar = styled.div`
   padding: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
 
   @media (max-width: 768px) {
     width: 100%;
     padding: 10px;
     flex-direction: row;
     justify-content: space-around;
+    align-items: center; 
   }
 `;
-
 const Logo = styled.div`
   font-size: 24px;
   font-weight: bold;

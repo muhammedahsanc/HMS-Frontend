@@ -241,7 +241,6 @@ const handleDelete =(id:any)=>{
             {columnIndex === 0 ? null : column.render("Header")}
           </th>
         ))}
-        {/* Add headers for edit and delete actions */}
          {/* <th>Edit</th> */}
         <th>Status</th> 
       </tr>

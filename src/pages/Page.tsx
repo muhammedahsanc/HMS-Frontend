@@ -20,7 +20,7 @@ function Page() {
         </Route>
       
         <Route element={<ProtectedRouteAdministrater />}>
-          <Route path="/doctor-administrater" element={<AdministraterDashboard/>} />
+          <Route path="/administrater" element={<AdministraterDashboard/>} />
         </Route>
         <Route path="*" element={<PageNotFound />} />
       </Routes>
